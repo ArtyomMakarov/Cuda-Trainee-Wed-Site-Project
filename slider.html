@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Фиксированное меню для сайта</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <style>
+        body {
+            margin: 0;
+            height: 3000px;
+            background: linear-gradient(-45deg, #CFCFCF, #555);
+        }
+        .header {
+            height: 180px;
+        }
+        .navigation {
+            background: #EF0505;
+            height: 40px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+            font-size: 16px;
+            line-height: 40px;
+            position: relative;
+            top: 140px;
+        }
+        .navigation.fixed{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(239, 5, 5, 0.95);
+        }
+        .navigation ul{
+            width: 1180px;
+            padding-left: 0;
+            margin: 0 auto;
+            display: block;
+        }
+        .navigation__menu li{
+            float: left;
+            list-style: none;
+            padding: 0 25px;
+            border-right: 1px solid #D60000;
+        }
+        .navigation__menu a {
+            color: #fff;
+            text-decoration: none;
+            font-family: Verdana;
+        }
+        .navigation__menu>li a:hover{
+            color: #656565;
+            transition: color 0.5s ease;
+        }
+
+        .to-top {
+            display: none;
+            padding: 15px;
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            border-radius: 15px;
+            background: #fff;
+            border: 1px gray solid;
+            color: #000;
+            text-decoration: none;
+            opacity: .7;
+        }
+
+        .to-top:hover {
+            background: white;
+            opacity: 1;
+        }
+
+        .my-super-puper-slider {
+            width: 100%;
+        }
+
+        .my-slide {
+            height: 120px;
+            font-size: 72px;
+            color: #fff;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .my-slide-01 {background-color: red;}
+        .my-slide-02 {background-color: yellow;}
+        .my-slide-03 {background-color: cyan;}
+
+        .my-super-puper-slider .slick-prev {
+            left: 50px;
+            z-index: 101;
+        }
+
+        .my-super-puper-slider .slick-next {
+            right: 50px;
+            z-index: 101;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="my-super-puper-slider">
+    <div class="my-slide my-slide-01">your content slide 1</div>
+    <div class="my-slide my-slide-02">your content slide 2</div>
+    <div class="my-slide my-slide-03">your content slide 3</div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+    jQuery(function($) {
+        var $navMenu = $('.navigation');
+        var navMenuTop = $navMenu.offset().top;
+        var $toTop   = $('.to-top');
+        var body     = $('html, body');
+
+        $(window).scroll(function(){
+
+            if($(window).scrollTop()>navMenuTop){
+                $navMenu.addClass('fixed');
+            }
+            else if ($(window).scrollTop()<navMenuTop){
+                $navMenu.removeClass('fixed');
+            }
+
+            if($(window).scrollTop()>1000){
+                $toTop.fadeIn(800);
+            }
+            else if ($(window).scrollTop()<1000){
+                $toTop.hide();
+            }
+        });
+
+        $toTop.on('click', function(event) {
+            event.preventDefault();
+            body.animate({scrollTop:0}, 1200);
+        });
+
+        $('.my-super-puper-slider').slick({
+            autoplay: 5000,
+            dots: true,
+            slidesToShow: 2,
+        });
+    });
+</script>
+</body>
+</html>
